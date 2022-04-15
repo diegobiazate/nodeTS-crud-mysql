@@ -1,18 +1,20 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/mysql';
 
+//criando a Instance do Cliente com as devidas tipagens.
 export interface ClientInstance extends Model {
     id: number;
     firstName: string;
     lastName: string;
-    birthDate: Date;
     email: string;
     aboutYou: string;
 }
 
+//criando a Instance do Cliente com as devidas tipagens.
 export const Client = sequelize.define<ClientInstance>("Client", {
     id:{
         primaryKey: true,
+        autoIncrement: true,
         type: DataTypes.INTEGER
     },
     firstName: {
@@ -20,9 +22,6 @@ export const Client = sequelize.define<ClientInstance>("Client", {
     },
     lastName: {
         type: DataTypes.STRING
-    },
-    birthDate: {
-        type: DataTypes.DATE
     },
     email: {
         type: DataTypes.STRING

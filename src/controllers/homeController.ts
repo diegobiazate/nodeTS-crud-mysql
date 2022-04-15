@@ -1,16 +1,13 @@
 import { Request, Response } from "express";
-import { sequelize } from "../instances/mysql";
 
 import { Client } from '../models/Client';
 
 export const home = async (req: Request, res: Response) => {
-    // testando conexão com o banco:
-    try {
-        await sequelize.authenticate();
-        console.log("Conexão estabelecida com Sucesso!");
-    } catch (error) {
-        console.log("Erro: ", error);
-    }
+    //buscando Todos os clientes no banco de Dados.
+    let clients = await Client.findAll();
 
-    res.render('pages/home');
+    //encaminhando para a pagina home com os dados dos clientes
+    res.render('pages/home', {
+        clients
+    });
 }

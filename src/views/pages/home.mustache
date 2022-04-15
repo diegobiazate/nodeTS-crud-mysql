@@ -2,12 +2,85 @@
 
 <h2>Página Home</h2>
 <hr/>
+<!-- Verificando se os dados do cliente está sendo enviado para o formulário -->
+<!-- Se estiver, irá preencer os values e o encaminhando para o UPDATE-->
+{{#cliente}}
+    <h2>Editar Cliente {{id}}</h2>
+    <form method="POST" action="/update">
+        <input type="hidden" name="id" value={{id}}>
+        <label>First name:</label>
+        <br>
+        <input type="text" name="firstName" value={{firstName}}>
+        <br>
+        <label>Last name:</label>
+        <br>
+        <input type="text" name="lastName" value={{lastName}}>
+        <br>
+        <label>email:</label>
+        <br>
+        <input type="email" name="email" value={{email}}>
+        <br>
+        <label>About You:</label>
+        <br>
+        <textarea name="aboutYou" rows="10" cols="30">{{aboutYou}}</textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+{{/cliente}}
+<!-- Caso não seja enviado dados de cliente para o form, se trata de um novo cliente -->
+{{^cliente}}
+    <h2>Inserir um Novo Cliente</h2>
+    <form method="POST" action="/newClient">
+        <label>First name:</label>
+        <br>
+        <input type="text" name="firstName">
+        <br>
+        <label>Last name:</label>
+        <br>
+        <input type="text" name="lastName">
+        <br>
+        <label>email:</label>
+        <br>
+        <input type="email" name="email">
+        <br>
+        <label>About You:</label>
+        <br>
+        <textarea name="aboutYou" rows="10" cols="30"></textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form> 
+{{/cliente}}
+
+<hr/>
 <h2>Lista de Clientes</h2>
-<ul>
-    <li>Nome: </li>
-    <li>Data de Nascimento: </li>
-    <li>Sobre: </li>
-</ul>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>E-mail</th>
+    <th>Sobre você</th>
+    <th>Alterar</th>
+    <th>Deletar</th>
+  </tr>
+  {{#clients}}
+  <tr>
+    <td>{{id}}</td>
+    <td>{{firstName}} {{lastName}}</td>
+    <td>{{email}}</td>
+    <td>{{aboutYou}}</td>
+    <td> 
+        <a href="/client/{{id}}/update">
+            <button>Alterar</button>
+        </a>
+    </td>
+    <td> 
+        <a href="/client/{{id}}/delete">
+            <button>Deletar</button>
+        </a>
+    </td>
+  </tr>
+  {{/clients}}
+</table>
 
 <hr/>
 
